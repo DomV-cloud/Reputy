@@ -1,0 +1,6 @@
+@Reputy.Api_HostAddress = http://localhost:5073
+
+GET {{Reputy.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
