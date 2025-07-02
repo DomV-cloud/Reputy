@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reputy.Api.Controllers.Authentication;
 using Reputy.Api.Filters;
@@ -11,6 +12,7 @@ namespace Reputy.Api.Controllers.User
     [ApiController]
     [Route("user")]
     [ErrorHandlingFilter]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -35,7 +37,7 @@ namespace Reputy.Api.Controllers.User
                     return BadRequest($"Invalid user ID:{userID}");
                 }
 
-                var userAdvertisements = await _advertisementRepository.GetUserAdvertisements(userID);
+                var userAdvertisements = await _advertisementRepository.GetUserAdvertisementsAsync(userID);
 
                 if (userAdvertisements == null)
                 {

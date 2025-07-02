@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reputy.Application.Common.Interfaces.Persistance;
 using Reputy.Application.DatabaseContext;
-using Reputy.Domain.Entities;
 
 namespace Reputy.Infrastructure.Persistance.Advertisement
 {
@@ -14,7 +13,15 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
             _context = context;
         }
 
-        public async Task<List<Domain.Entities.Advertisement>> GetUserAdvertisements(Guid userID)
+        public async Task<List<Domain.Entities.Advertisement>> GetAllAdvertisementsAsync()
+        {
+            return await _context.Advertisements
+           .AsNoTracking()
+             .Include(advertisement => advertisement.AdvertisementRealEstate)
+             .ToListAsync();
+        }
+
+        public async Task<List<Domain.Entities.Advertisement>> GetUserAdvertisementsAsync(Guid userID)
         {
             return await _context.Advertisements
             .AsNoTracking()

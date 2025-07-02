@@ -46,6 +46,5 @@ namespace Reputy.Infrastructure.Authentication
 
             return new JwtSecurityTokenHandler().WriteToken(securityToken);
         }
-
     }
 }
