@@ -24,7 +24,7 @@ namespace Reputy.Api.Controllers.Advertisement
             _logger = logger;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> GetAllAdvertisements()
         {
             try
@@ -35,7 +35,7 @@ namespace Reputy.Api.Controllers.Advertisement
                     return NotFound("No advertisements found.");
                 }
 
-                var response = _mapper.Map<List<AdvertisementRealEstateResponse>>(allAdvertisement);
+                var response = _mapper.Map<List<AdvertisementResponse>>(allAdvertisement);
                
                 return Ok(response);
             }
