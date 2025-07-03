@@ -26,17 +26,15 @@ namespace Reputy.Domain.Entities
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        
 
         [JsonPropertyName("isShared")]
         public bool IsShared { get; set; } = false;
 
         [Required]
-        [Precision(18, 4)]
         [JsonPropertyName("price")]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
-        [Precision(18, 4)]
+        [Precision(18, 2)]
         [JsonPropertyName("deposit")]
         public decimal? Deposit { get; set; }
 

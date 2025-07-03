@@ -13,9 +13,8 @@ namespace Reputy.Domain.Entities
 
         public Advertisement Advertisement { get; set; } = null!;
 
-        [Required]
-        [JsonPropertyName("location")]
-        public string Location { get; set; } = null!; // split address into object
+        [JsonPropertyName("address")]
+        public Address? Address { get; set; } // should be required, but for faster development is optional
 
         [Required]
         [JsonPropertyName("disposition")]
@@ -26,11 +25,11 @@ namespace Reputy.Domain.Entities
         public TypeOfRental RentalType { get; set; }
 
         [Required]
-        [Precision(18, 4)]
+        [Precision(18, 2)]
         [JsonPropertyName("size")]
         public decimal Size { get; set; }
 
         [JsonPropertyName("formatedSize")]
-        public string FormatedSize => String.Join(Size.ToString(), "m2"); 
+        public string FormatedSize => $"{Size} m2";
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Reputy.Application.HelperMethods.Authentication;
 using Reputy.Domain.Entities;
 using Reputy.Domain.Enums;
 
@@ -18,6 +17,10 @@ namespace Reputy.Application.DatabaseContext
         public static readonly Guid RealEstate2Id = Guid.Parse("99999999-9999-9999-9999-999999999999");
         public static readonly Guid RealEstate3Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
 
+        public static readonly Guid Address1Id = Guid.NewGuid();
+        public static readonly Guid Address2Id = Guid.NewGuid();
+        public static readonly Guid Address3Id = Guid.NewGuid();
+
         public static readonly Guid Rental1Id = Guid.Parse("44444444-4444-4444-4444-444444444444");
         public static readonly Guid Reference1Id = Guid.Parse("55555555-5555-5555-5555-555555555555");
 
@@ -29,6 +32,7 @@ namespace Reputy.Application.DatabaseContext
         public DbSet<User> Users => Set<User>();
         public DbSet<Advertisement> Advertisements => Set<Advertisement>();
         public DbSet<AdvertisementRealEstate> AdvertisementRealEstates => Set<AdvertisementRealEstate>();
+        public DbSet<Address> Addresses => Set<Address>();
         public DbSet<Reference> References => Set<Reference>();
         public DbSet<Rental> Rentals => Set<Rental>();
 
@@ -68,6 +72,13 @@ namespace Reputy.Application.DatabaseContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
+            // AdvertisementRealEstate <-> Address (1:1)
+            modelBuilder.Entity<AdvertisementRealEstate>()
+                .HasOne(r => r.Address)
+                .WithOne(a => a.AdvertisementRealEstate)
+                .HasForeignKey<Address>(a => a.AdvertisementRealEstateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Seed data
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -103,7 +114,7 @@ namespace Reputy.Application.DatabaseContext
                     UserId = User1Id,
                     Title = "Moderní byt v centru",
                     Address = "Náměstí Míru 5, Praha",
-                    Price = 15000m,
+                    Price = 15000,
                     IsShared = true,
                     Deposit = 5000m,
                     PetsAllowed = true,
@@ -116,7 +127,7 @@ namespace Reputy.Application.DatabaseContext
                     UserId = User1Id,
                     Title = "Byt 2+KK s výhledem na řeku",
                     Address = "Rašínovo nábřeží 12, Praha 2",
-                    Price = 18000m,
+                    Price = 18000,
                     IsShared = false,
                     Deposit = 6000m,
                     PetsAllowed = false,
@@ -129,7 +140,7 @@ namespace Reputy.Application.DatabaseContext
                     UserId = User1Id,
                     Title = "Velký byt 3+1 pro rodinu",
                     Address = "U školy 45, Brno",
-                    Price = 22000m,
+                    Price = 22000,
                     IsShared = false,
                     Deposit = 8000m,
                     PetsAllowed = true,
@@ -143,7 +154,6 @@ namespace Reputy.Application.DatabaseContext
                 {
                     ID = RealEstate1Id,
                     AdvertisementId = Ad1Id,
-                    Location = "Praha 1",
                     Disposition = Disposition.OneKK,
                     RentalType = TypeOfRental.House,
                     Size = 30.0m,
@@ -154,7 +164,6 @@ namespace Reputy.Application.DatabaseContext
                 {
                     ID = RealEstate2Id,
                     AdvertisementId = Ad2Id,
-                    Location = "Praha 2",
                     Disposition = Disposition.TwoKK,
                     RentalType = TypeOfRental.Flat,
                     Size = 40.0m,
@@ -165,12 +174,41 @@ namespace Reputy.Application.DatabaseContext
                 {
                     ID = RealEstate3Id,
                     AdvertisementId = Ad3Id,
-                    Location = "Brno",
                     Disposition = Disposition.ThreePlusOne,
                     RentalType = TypeOfRental.Flat,
                     Size = 85.0m,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
+                }
+            );
+
+            modelBuilder.Entity<Address>().HasData(
+                new Address
+                {
+                    ID = Address1Id,
+                    AdvertisementRealEstateId = RealEstate1Id,
+                    City = "Praha",
+                    Street = "Náměstí Míru",
+                    StreetCode = "12000",
+                    StreetNumber = "5"
+                },
+                new Address
+                {
+                    ID = Address2Id,
+                    AdvertisementRealEstateId = RealEstate2Id,
+                    City = "Praha",
+                    Street = "Rašínovo nábřeží",
+                    StreetCode = "12800",
+                    StreetNumber = "12"
+                },
+                new Address
+                {
+                    ID = Address3Id,
+                    AdvertisementRealEstateId = RealEstate3Id,
+                    City = "Brno",
+                    Street = "U školy",
+                    StreetCode = "60200",
+                    StreetNumber = "45"
                 }
             );
 

@@ -1,4 +1,6 @@
-﻿using Reputy.Domain.Entities;
+﻿using Reputy.Application.Pagination;
+using Reputy.Application.PaginationFilter;
+using Reputy.Domain.Entities;
 
 namespace Reputy.Application.Common.Interfaces.Persistance
 {
@@ -7,5 +9,7 @@ namespace Reputy.Application.Common.Interfaces.Persistance
         Task<List<Advertisement>> GetUserAdvertisementsAsync(Guid userID);
 
         Task<List<Advertisement>> GetAllAdvertisementsAsync();
+
+        Task<PagedResponse<List<Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter);
     }
 }

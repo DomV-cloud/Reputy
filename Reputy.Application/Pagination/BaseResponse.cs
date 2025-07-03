@@ -14,8 +14,5 @@
             Errors = null;
             Data = data;
         }
-
-
-
     }
 }

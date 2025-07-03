@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Reputy.Application.Pagination;
 using Reputy.Contracts.Advertisement;
 using Reputy.Domain.Entities;
 
@@ -10,6 +11,8 @@ namespace Reputy.Infrastructure.Mapper
         {
             CreateMap<Advertisement, AdvertisementResponse>();
             CreateMap<AdvertisementRealEstate, AdvertisementRealEstateResponse>();
+
+            CreateMap<Advertisement, PagedResponse<AdvertisementResponse>>();
         }
     }
 }

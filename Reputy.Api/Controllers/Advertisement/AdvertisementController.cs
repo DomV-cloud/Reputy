@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reputy.Api.Filters;
 using Reputy.Application.Common.Interfaces.Persistance;
+using Reputy.Application.PaginationFilter;
 using Reputy.Contracts.Advertisement;
 
 namespace Reputy.Api.Controllers.Advertisement
@@ -37,6 +38,32 @@ namespace Reputy.Api.Controllers.Advertisement
 
                 var response = _mapper.Map<List<AdvertisementResponse>>(allAdvertisement);
                
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> GetSearchedAdvertisements([FromQuery] AdvertisementFilter filter)
+        {
+            try
+            {
+                if (filter == null)
+                {
+                    return BadRequest("Filter cannot be null");
+                }
+
+                var advertisements = await _advertisementRepository.GetAdvertisementsByFilter(filter);
+                if (advertisements == null)
+                {
+                    return NotFound("No advertisements found matching the filter criteria.");
+                }
+
+                var response = _mapper.Map<List<AdvertisementResponse>>(advertisements.Data);
+
                 return Ok(response);
             }
             catch (Exception ex)
