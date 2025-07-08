@@ -6,7 +6,7 @@ namespace Reputy.Application.PaginationFilter
     {
         public string? City { get; set; }
         public decimal? Size { get; set; }
-        public decimal? Price { get; set; }
+        public decimal? MaxPrice { get; set; }
         public string? Disposition { get; set; }
     }
 }

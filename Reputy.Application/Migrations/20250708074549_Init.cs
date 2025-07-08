@@ -70,8 +70,8 @@ namespace Reputy.Application.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AdvertisementId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Disposition = table.Column<int>(type: "int", nullable: false),
-                    RentalType = table.Column<int>(type: "int", nullable: false),
+                    Disposition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RentalType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Size = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -189,8 +189,8 @@ namespace Reputy.Application.Migrations
                 columns: new[] { "ID", "Av", "AvatarUrl", "AverageRating", "CreatedAt", "Email", "FirstName", "IsVerified", "LastName", "Password", "Role", "Salt", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("11111111-1111-1111-1111-111111111111"), 0, "https://example.com/avatar1.png", 0m, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1746), "jan.novak@example.com", "Jan", true, "Novak", "hashedpassword1", 2, null, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1748) },
-                    { new Guid("22222222-2222-2222-2222-222222222222"), 0, null, 0m, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1755), "eva.svobodova@example.com", "Eva", false, "Svobodova", null, 1, null, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1757) }
+                    { new Guid("11111111-1111-1111-1111-111111111111"), 0, "https://example.com/avatar1.png", 0m, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5937), "jan.novak@example.com", "Jan", true, "Novak", "hashedpassword1", 2, null, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5938) },
+                    { new Guid("22222222-2222-2222-2222-222222222222"), 0, null, 0m, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5944), "eva.svobodova@example.com", "Eva", false, "Svobodova", null, 1, null, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5945) }
                 });
 
             migrationBuilder.InsertData(
@@ -198,9 +198,9 @@ namespace Reputy.Application.Migrations
                 columns: new[] { "ID", "Address", "CreatedAt", "Deposit", "Description", "ImageUrls", "IsShared", "PetsAllowed", "Price", "Title", "UpdatedAt", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("33333333-3333-3333-3333-333333333333"), "Náměstí Míru 5, Praha", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1916), 5000m, null, "[]", true, true, 15000, "Moderní byt v centru", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1918), new Guid("11111111-1111-1111-1111-111111111111") },
-                    { new Guid("77777777-7777-7777-7777-777777777777"), "Rašínovo nábřeží 12, Praha 2", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1925), 6000m, null, "[]", false, false, 18000, "Byt 2+KK s výhledem na řeku", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1927), new Guid("11111111-1111-1111-1111-111111111111") },
-                    { new Guid("88888888-8888-8888-8888-888888888888"), "U školy 45, Brno", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1933), 8000m, null, "[]", false, true, 22000, "Velký byt 3+1 pro rodinu", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1935), new Guid("11111111-1111-1111-1111-111111111111") }
+                    { new Guid("33333333-3333-3333-3333-333333333333"), "Náměstí Míru 5, Praha", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6083), 5000m, null, "[]", true, true, 15000, "Moderní byt v centru", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6084), new Guid("11111111-1111-1111-1111-111111111111") },
+                    { new Guid("77777777-7777-7777-7777-777777777777"), "Rašínovo nábřeží 12, Praha 2", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6090), 6000m, null, "[]", false, false, 18000, "Byt 2+KK s výhledem na řeku", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6091), new Guid("11111111-1111-1111-1111-111111111111") },
+                    { new Guid("88888888-8888-8888-8888-888888888888"), "U školy 45, Brno", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6095), 8000m, null, "[]", false, true, 22000, "Velký byt 3+1 pro rodinu", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6096), new Guid("11111111-1111-1111-1111-111111111111") }
                 });
 
             migrationBuilder.InsertData(
@@ -208,30 +208,30 @@ namespace Reputy.Application.Migrations
                 columns: new[] { "ID", "AdvertisementId", "CreatedAt", "Disposition", "RentalType", "Size", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("99999999-9999-9999-9999-999999999999"), new Guid("77777777-7777-7777-7777-777777777777"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1973), 4, 1, 40.0m, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1975) },
-                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("88888888-8888-8888-8888-888888888888"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1990), 5, 1, 85.0m, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1992) },
-                    { new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"), new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1966), 2, 2, 30.0m, new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1967) }
+                    { new Guid("3016bba1-e20a-47f0-a7cb-de128dbd301d"), new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6118), "OneKK", "House", 30.0m, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6119) },
+                    { new Guid("99999999-9999-9999-9999-999999999999"), new Guid("77777777-7777-7777-7777-777777777777"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6123), "TwoKK", "Flat", 40.0m, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6124) },
+                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("88888888-8888-8888-8888-888888888888"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6128), "ThreePlusOne", "Flat", 85.0m, new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6129) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rentals",
                 columns: new[] { "ID", "AdvertisementID", "CreatedAt", "EndDate", "LandlordId", "StartDate", "Status", "TenantId", "UpdatedAt" },
-                values: new object[] { new Guid("44444444-4444-4444-4444-444444444444"), new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2063), new DateTime(2026, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2025, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 2, new Guid("22222222-2222-2222-2222-222222222222"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2064) });
+                values: new object[] { new Guid("44444444-4444-4444-4444-444444444444"), new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6181), new DateTime(2026, 7, 8, 0, 0, 0, 0, DateTimeKind.Local), new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2025, 7, 8, 0, 0, 0, 0, DateTimeKind.Local), 2, new Guid("22222222-2222-2222-2222-222222222222"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6182) });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "ID", "AdvertisementRealEstateId", "City", "CreatedAt", "PostalCode", "Street", "StreetNumber", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { new Guid("155bf4ef-e3d7-4987-b7e1-b7836f0dd4df"), new Guid("99999999-9999-9999-9999-999999999999"), "Praha", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2022), "12800", "Rašínovo nábřeží", "12", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2023) },
-                    { new Guid("46bf7244-7ee4-4414-b0de-76119d156855"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Brno", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2027), "60200", "U školy", "45", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2028) },
-                    { new Guid("fb419a08-1490-4069-adf8-a12113a7d128"), new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"), "Praha", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2015), "12000", "Náměstí Míru", "5", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2016) }
+                    { new Guid("5928b0b6-1c2e-4311-b9be-4352d999e0a6"), new Guid("3016bba1-e20a-47f0-a7cb-de128dbd301d"), "Praha", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6145), "12000", "Náměstí Míru", "5", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6146) },
+                    { new Guid("6866e5a4-bfcd-47e1-901e-050d120bc533"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Brno", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6154), "60200", "U školy", "45", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6155) },
+                    { new Guid("cfd54c95-91ac-4d52-b0f5-3517de43c80f"), new Guid("99999999-9999-9999-9999-999999999999"), "Praha", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6149), "12800", "Rašínovo nábřeží", "12", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6150) }
                 });
 
             migrationBuilder.InsertData(
                 table: "References",
                 columns: new[] { "ID", "Comment", "CreatedAt", "FromUserID", "Rating", "RentalID", "ToUserID", "UpdatedAt" },
-                values: new object[] { new Guid("55555555-5555-5555-5555-555555555555"), "Velmi spolehlivý pronajímatel", new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2089), new Guid("22222222-2222-2222-2222-222222222222"), 5m, new Guid("44444444-4444-4444-4444-444444444444"), new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2090) });
+                values: new object[] { new Guid("55555555-5555-5555-5555-555555555555"), "Velmi spolehlivý pronajímatel", new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6198), new Guid("22222222-2222-2222-2222-222222222222"), 5m, new Guid("44444444-4444-4444-4444-444444444444"), new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6199) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_AdvertisementRealEstateId",

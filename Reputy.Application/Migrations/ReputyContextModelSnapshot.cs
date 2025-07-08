@@ -72,36 +72,36 @@ namespace Reputy.Application.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("fb419a08-1490-4069-adf8-a12113a7d128"),
-                            AdvertisementRealEstateId = new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"),
+                            ID = new Guid("5928b0b6-1c2e-4311-b9be-4352d999e0a6"),
+                            AdvertisementRealEstateId = new Guid("3016bba1-e20a-47f0-a7cb-de128dbd301d"),
                             City = "Praha",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2015),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6145),
                             PostalCode = "12000",
                             Street = "Náměstí Míru",
                             StreetNumber = "5",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2016)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6146)
                         },
                         new
                         {
-                            ID = new Guid("155bf4ef-e3d7-4987-b7e1-b7836f0dd4df"),
+                            ID = new Guid("cfd54c95-91ac-4d52-b0f5-3517de43c80f"),
                             AdvertisementRealEstateId = new Guid("99999999-9999-9999-9999-999999999999"),
                             City = "Praha",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2022),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6149),
                             PostalCode = "12800",
                             Street = "Rašínovo nábřeží",
                             StreetNumber = "12",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2023)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6150)
                         },
                         new
                         {
-                            ID = new Guid("46bf7244-7ee4-4414-b0de-76119d156855"),
+                            ID = new Guid("6866e5a4-bfcd-47e1-901e-050d120bc533"),
                             AdvertisementRealEstateId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             City = "Brno",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2027),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6154),
                             PostalCode = "60200",
                             Street = "U školy",
                             StreetNumber = "45",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2028)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6155)
                         });
                 });
 
@@ -173,42 +173,42 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("33333333-3333-3333-3333-333333333333"),
                             Address = "Náměstí Míru 5, Praha",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1916),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6083),
                             Deposit = 5000m,
                             ImageUrls = "[]",
                             IsShared = true,
                             PetsAllowed = true,
                             Price = 15000,
                             Title = "Moderní byt v centru",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1918),
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6084),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             ID = new Guid("77777777-7777-7777-7777-777777777777"),
                             Address = "Rašínovo nábřeží 12, Praha 2",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1925),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6090),
                             Deposit = 6000m,
                             ImageUrls = "[]",
                             IsShared = false,
                             PetsAllowed = false,
                             Price = 18000,
                             Title = "Byt 2+KK s výhledem na řeku",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1927),
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6091),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             ID = new Guid("88888888-8888-8888-8888-888888888888"),
                             Address = "U školy 45, Brno",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1933),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6095),
                             Deposit = 8000m,
                             ImageUrls = "[]",
                             IsShared = false,
                             PetsAllowed = true,
                             Price = 22000,
                             Title = "Velký byt 3+1 pro rodinu",
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1935),
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6096),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         });
                 });
@@ -227,12 +227,14 @@ namespace Reputy.Application.Migrations
                         .HasColumnType("datetime2")
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
-                    b.Property<int>("Disposition")
-                        .HasColumnType("int")
+                    b.Property<string>("Disposition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "disposition");
 
-                    b.Property<int>("RentalType")
-                        .HasColumnType("int")
+                    b.Property<string>("RentalType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "rentalType");
 
                     b.Property<decimal>("Size")
@@ -256,33 +258,33 @@ namespace Reputy.Application.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"),
+                            ID = new Guid("3016bba1-e20a-47f0-a7cb-de128dbd301d"),
                             AdvertisementId = new Guid("33333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1966),
-                            Disposition = 2,
-                            RentalType = 2,
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6118),
+                            Disposition = "OneKK",
+                            RentalType = "House",
                             Size = 30.0m,
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1967)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6119)
                         },
                         new
                         {
                             ID = new Guid("99999999-9999-9999-9999-999999999999"),
                             AdvertisementId = new Guid("77777777-7777-7777-7777-777777777777"),
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1973),
-                            Disposition = 4,
-                            RentalType = 1,
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6123),
+                            Disposition = "TwoKK",
+                            RentalType = "Flat",
                             Size = 40.0m,
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1975)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6124)
                         },
                         new
                         {
                             ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             AdvertisementId = new Guid("88888888-8888-8888-8888-888888888888"),
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1990),
-                            Disposition = 5,
-                            RentalType = 1,
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6128),
+                            Disposition = "ThreePlusOne",
+                            RentalType = "Flat",
                             Size = 85.0m,
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1992)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6129)
                         });
                 });
 
@@ -339,12 +341,12 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("55555555-5555-5555-5555-555555555555"),
                             Comment = "Velmi spolehlivý pronajímatel",
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2089),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6198),
                             FromUserID = new Guid("22222222-2222-2222-2222-222222222222"),
                             Rating = 5m,
                             RentalID = new Guid("44444444-4444-4444-4444-444444444444"),
                             ToUserID = new Guid("11111111-1111-1111-1111-111111111111"),
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2090)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6199)
                         });
                 });
 
@@ -404,13 +406,13 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("44444444-4444-4444-4444-444444444444"),
                             AdvertisementID = new Guid("33333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2063),
-                            EndDate = new DateTime(2026, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6181),
+                            EndDate = new DateTime(2026, 7, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             LandlordId = new Guid("11111111-1111-1111-1111-111111111111"),
-                            StartDate = new DateTime(2025, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDate = new DateTime(2025, 7, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             Status = 2,
                             TenantId = new Guid("22222222-2222-2222-2222-222222222222"),
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2064)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(6182)
                         });
                 });
 
@@ -484,27 +486,27 @@ namespace Reputy.Application.Migrations
                             Av = 0,
                             AvatarUrl = "https://example.com/avatar1.png",
                             AverageRating = 0m,
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1746),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5937),
                             Email = "jan.novak@example.com",
                             FirstName = "Jan",
                             IsVerified = true,
                             LastName = "Novak",
                             Password = "hashedpassword1",
                             Role = 2,
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1748)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5938)
                         },
                         new
                         {
                             ID = new Guid("22222222-2222-2222-2222-222222222222"),
                             Av = 0,
                             AverageRating = 0m,
-                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1755),
+                            CreatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5944),
                             Email = "eva.svobodova@example.com",
                             FirstName = "Eva",
                             IsVerified = false,
                             LastName = "Svobodova",
                             Role = 1,
-                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1757)
+                            UpdatedAt = new DateTime(2025, 7, 8, 9, 45, 49, 262, DateTimeKind.Local).AddTicks(5945)
                         });
                 });
 

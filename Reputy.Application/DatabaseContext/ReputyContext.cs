@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reputy.Domain.Entities;
 using Reputy.Domain.Enums;
 
@@ -38,6 +39,14 @@ namespace Reputy.Application.DatabaseContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AdvertisementRealEstate>()
+               .Property(e => e.Disposition)
+               .HasConversion(new EnumToStringConverter<Disposition>());
+
+            modelBuilder.Entity<AdvertisementRealEstate>()
+               .Property(e => e.RentalType)
+               .HasConversion(new EnumToStringConverter<TypeOfRental>());
+
             // Reference relationships
             modelBuilder.Entity<Reference>()
                 .HasOne(r => r.FromUser)
