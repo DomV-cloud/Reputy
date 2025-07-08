@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Reputy.Domain\Reputy.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="User\" />
-  </ItemGroup>
-
 </Project>

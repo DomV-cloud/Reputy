@@ -36,18 +36,49 @@ namespace Reputy.Application.DatabaseContext
         public DbSet<Address> Addresses => Set<Address>();
         public DbSet<Reference> References => Set<Reference>();
         public DbSet<Rental> Rentals => Set<Rental>();
+        public DbSet<Image> Images => Set<Image>();
 
-        private void SeedAdvertisements(ModelBuilder modelBuilder)
+        private static void SeedAdvertisements(ModelBuilder modelBuilder)
         {
             var rnd = new Random();
             var advertisements = new List<Advertisement>();
             var realEstates = new List<AdvertisementRealEstate>();
             var addresses = new List<Address>();
+            var images = new List<Image>();
+
+            var landlords = new List<User>();
+            for (int i = 1; i <= 10; i++)
+            {
+                landlords.Add(new User
+                {
+                    ID = Guid.Parse($"00000000-0000-0000-0000-{i.ToString("D12")}"),
+                    FirstName = $"Jan{i}",
+                    LastName = $"Pronajímatel{i}",
+                    Email = $"jan.pronajimatel{i}@mail.cz",
+                    Password = "hashedpassword",
+                    Role = Role.LandLord,
+                    IsVerified = i % 2 == 0,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    AvatarUrl = $"https://randomuser.me/api/portraits/men/{i}.jpg"
+                });
+            }
+            modelBuilder.Entity<User>().HasData(landlords);
 
             string[] cities = { "Praha", "Brno", "Ostrava", "Plzeň", "Olomouc", "Hradec Králové", "Pardubice", "Zlín", "Liberec", "České Budějovice" };
             string[] streets = { "Hlavní", "Masarykova", "Dlouhá", "Školní", "Jiráskova", "Smetanova", "Tyršova", "Nádražní" };
             var dispositions = Enum.GetValues(typeof(Disposition)).Cast<Disposition>().ToArray();
             var rentalTypes = Enum.GetValues(typeof(TypeOfRental)).Cast<TypeOfRental>().ToArray();
+
+            // Ukázkové URL obrázků (v produkci by to byly reálné)
+            string[] sampleImages =
+            {
+        "https://images.unsplash.com/photo-1464983953574-0892a716854b",
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd",
+        "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+        "https://images.unsplash.com/photo-1472224371017-08207f84aaae"
+    };
 
             for (int i = 1; i <= 100; i++)
             {
@@ -62,10 +93,12 @@ namespace Reputy.Application.DatabaseContext
                 var price = rnd.Next(9000, 35000);
                 var size = rnd.Next(20, 110);
 
+                var landlord = landlords[rnd.Next(landlords.Count)];
+
                 advertisements.Add(new Advertisement
                 {
                     ID = adId,
-                    UserId = User1Id, // nebo losuj mezi více uživateli
+                    UserId = landlord.ID,
                     Title = $"Byt {i} - {city} {street}",
                     Address = $"{street} {rnd.Next(1, 100)}, {city}",
                     Price = price,
@@ -96,11 +129,24 @@ namespace Reputy.Application.DatabaseContext
                     PostalCode = $"{rnd.Next(10000, 99999)}",
                     StreetNumber = $"{rnd.Next(1, 150)}"
                 });
+
+                // Obrázky – 2 až 4 na každý inzerát
+                var imgCount = rnd.Next(2, 5);
+                for (int img = 0; img < imgCount; img++)
+                {
+                    images.Add(new Image
+                    {
+                        ID = Guid.NewGuid(),
+                        AdvertisementId = adId,
+                        Url = $"{sampleImages[rnd.Next(sampleImages.Length)]}?w=600&sig={rnd.Next(10000)}"
+                    });
+                }
             }
 
             modelBuilder.Entity<Advertisement>().HasData(advertisements);
             modelBuilder.Entity<AdvertisementRealEstate>().HasData(realEstates);
             modelBuilder.Entity<Address>().HasData(addresses);
+            modelBuilder.Entity<Image>().HasData(images);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -153,7 +199,13 @@ namespace Reputy.Application.DatabaseContext
                 .WithOne(a => a.AdvertisementRealEstate)
                 .HasForeignKey<Address>(a => a.AdvertisementRealEstateId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
+
+            modelBuilder.Entity<Image>()
+                    .HasOne(i => i.Advertisement)
+                    .WithMany(a => a.Images)
+                    .HasForeignKey(i => i.AdvertisementId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
             SeedAdvertisements(modelBuilder);
 
             // Seed data

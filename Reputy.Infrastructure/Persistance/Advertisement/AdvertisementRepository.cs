@@ -18,22 +18,24 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
             _context = ctx;
         }
 
-        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter f)
+        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter)
         {
             var query = _context.Advertisements
+                        .Include(a => a.Images)
+                        .Include(a => a.Landlord)
                         .Include(a => a.AdvertisementRealEstate)
                         .ThenInclude(re => re.Address)
                         .AsQueryable()
-                        .ApplyAdvertisementFilter(f);
+                        .ApplyAdvertisementFilter(filter);
 
             var total = _context.Advertisements.Count();
 
             var data = await query
-                .Skip((f.PageNumber - 1) * f.PageSize)
-                .Take(f.PageSize)
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
                 .ToListAsync();
 
-            return new PagedResponse<List<Domain.Entities.Advertisement>>(data, f.PageNumber, f.PageSize, total);
+            return new PagedResponse<List<Domain.Entities.Advertisement>>(data, filter.PageNumber, filter.PageSize, total);
         }
 
         public async Task<List<Domain.Entities.Advertisement>> GetAllAdvertisementsAsync()

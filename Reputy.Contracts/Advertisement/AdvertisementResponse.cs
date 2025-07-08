@@ -1,4 +1,7 @@
-﻿namespace Reputy.Contracts.Advertisement
+﻿
+using Reputy.Contracts.User;
+
+namespace Reputy.Contracts.Advertisement
 {
     public record class AdvertisementResponse
     {
@@ -7,6 +10,7 @@
         public string Title { get; init; }
         public int Price { get; init; }
         public AdvertisementRealEstateResponse AdvertisementRealEstate { get; init; }
+        public LandLordResponse LandLord { get; init; }
     }
 
 }

@@ -42,7 +42,7 @@ namespace Reputy.Domain.Entities
         public bool PetsAllowed { get; set; }
 
         [JsonPropertyName("image_urls")]
-        public List<string> ImageUrls { get; set; } = [];
+        public List<Image> Images { get; set; } = [];
 
         [JsonPropertyName("landlord")]
         public User Landlord { get; set; }

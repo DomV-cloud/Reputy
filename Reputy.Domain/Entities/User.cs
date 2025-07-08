@@ -10,16 +10,12 @@ namespace Reputy.Domain.Entities
         [JsonPropertyName("firstName")]
         public string FirstName { get; set; } = null!;
 
-
         [Required]
         [JsonPropertyName("LastName")]
         public string LastName { get; set; } = null!;
 
         [JsonPropertyName("firstName")]
         public string FullName => String.Join(FirstName, LastName);
-
-        [JsonPropertyName("firstName")]
-        public int Av { get; set; }
 
         [Required]
         [JsonPropertyName("email")]
@@ -57,7 +53,6 @@ namespace Reputy.Domain.Entities
         public List<Rental> RentalsAsLandlord { get; set; } = [];
 
         [JsonPropertyName("rentals_tenant")]
-
         public List<Rental> RentalsAsTenant { get; set; } = new();
     }
 }
