@@ -37,6 +37,72 @@ namespace Reputy.Application.DatabaseContext
         public DbSet<Reference> References => Set<Reference>();
         public DbSet<Rental> Rentals => Set<Rental>();
 
+        private void SeedAdvertisements(ModelBuilder modelBuilder)
+        {
+            var rnd = new Random();
+            var advertisements = new List<Advertisement>();
+            var realEstates = new List<AdvertisementRealEstate>();
+            var addresses = new List<Address>();
+
+            string[] cities = { "Praha", "Brno", "Ostrava", "Plzeň", "Olomouc", "Hradec Králové", "Pardubice", "Zlín", "Liberec", "České Budějovice" };
+            string[] streets = { "Hlavní", "Masarykova", "Dlouhá", "Školní", "Jiráskova", "Smetanova", "Tyršova", "Nádražní" };
+            var dispositions = Enum.GetValues(typeof(Disposition)).Cast<Disposition>().ToArray();
+            var rentalTypes = Enum.GetValues(typeof(TypeOfRental)).Cast<TypeOfRental>().ToArray();
+
+            for (int i = 1; i <= 100; i++)
+            {
+                var adId = Guid.NewGuid();
+                var realEstateId = Guid.NewGuid();
+                var addressId = Guid.NewGuid();
+
+                var city = cities[rnd.Next(cities.Length)];
+                var street = streets[rnd.Next(streets.Length)];
+                var disposition = dispositions[rnd.Next(dispositions.Length)];
+                var rentalType = rentalTypes[rnd.Next(rentalTypes.Length)];
+                var price = rnd.Next(9000, 35000);
+                var size = rnd.Next(20, 110);
+
+                advertisements.Add(new Advertisement
+                {
+                    ID = adId,
+                    UserId = User1Id, // nebo losuj mezi více uživateli
+                    Title = $"Byt {i} - {city} {street}",
+                    Address = $"{street} {rnd.Next(1, 100)}, {city}",
+                    Price = price,
+                    IsShared = (i % 2 == 0),
+                    Deposit = price / 2,
+                    PetsAllowed = (i % 3 == 0),
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                });
+
+                realEstates.Add(new AdvertisementRealEstate
+                {
+                    ID = realEstateId,
+                    AdvertisementId = adId,
+                    Disposition = disposition,
+                    RentalType = rentalType,
+                    Size = size,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                });
+
+                addresses.Add(new Address
+                {
+                    ID = addressId,
+                    AdvertisementRealEstateId = realEstateId,
+                    City = city,
+                    Street = street,
+                    PostalCode = $"{rnd.Next(10000, 99999)}",
+                    StreetNumber = $"{rnd.Next(1, 150)}"
+                });
+            }
+
+            modelBuilder.Entity<Advertisement>().HasData(advertisements);
+            modelBuilder.Entity<AdvertisementRealEstate>().HasData(realEstates);
+            modelBuilder.Entity<Address>().HasData(addresses);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AdvertisementRealEstate>()
@@ -87,6 +153,8 @@ namespace Reputy.Application.DatabaseContext
                 .WithOne(a => a.AdvertisementRealEstate)
                 .HasForeignKey<Address>(a => a.AdvertisementRealEstateId)
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            SeedAdvertisements(modelBuilder);
 
             // Seed data
             modelBuilder.Entity<User>().HasData(

@@ -4,17 +4,17 @@
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public Uri? FirstPage { get; set; }
-        public Uri? LastPage { get; set; }
-        public int TotalPages { get; set; }
+        public bool HasPreviousPage => PageNumber > 1;
+        public bool HasNextPage => PageNumber < TotalPages;
+        public int TotalPages => (int)Math.Ceiling((double)TotalRecords / PageSize);
         public int TotalRecords { get; set; }
-        public Uri? NextPage { get; set; }
-        public Uri? PreviousPage { get; set; }
+        
         public PagedResponse(
             T data,
             int pageNumber,
             int pageSize,
-            int totalPages) : base(data)
+            int totalRecords
+            ) : base(data)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
@@ -22,7 +22,7 @@
             this.Message = null;
             this.Succeeded = true;
             this.Errors = null;
-            this.TotalRecords = totalPages;
+            this.TotalRecords = totalRecords;
         }
     }
 }

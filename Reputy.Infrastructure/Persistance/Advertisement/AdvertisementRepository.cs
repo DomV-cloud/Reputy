@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using Reputy.Application.Common.Interfaces.Persistance;
 using Reputy.Application.DatabaseContext;
 using Reputy.Application.Pagination;
