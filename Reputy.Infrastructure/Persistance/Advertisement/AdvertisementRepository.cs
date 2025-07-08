@@ -8,47 +8,76 @@ using System.Linq;
 
 namespace Reputy.Infrastructure.Persistance.Advertisement
 {
-    internal class AdvertisementRepository : IAdvertisementRepository
+    public class AdvertisementRepository : IAdvertisementRepository
     {
         private readonly ReputyContext _context;
 
-        public AdvertisementRepository(ReputyContext context)
+        public AdvertisementRepository(ReputyContext ctx)
         {
-            _context = context;
+            _context = ctx;
         }
 
-        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter)
+        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter f)
         {
             var query = _context.Advertisements
-                          .Include(a => a.AdvertisementRealEstate)
-                          .AsQueryable()
-                          .ApplyAdvertisementFilter(filter);
+                        .Include(a => a.AdvertisementRealEstate)
+                        .ThenInclude(re => re.Address)
+                        .AsQueryable()
+                        .ApplyAdvertisementFilter(f);
 
-            var totalRecords = _context.Advertisements.Count();
+            var total = _context.Advertisements.Count();
 
-            var pagedData = await query
-                .Skip((filter.PageNumber - 1) * filter.PageSize)
-                .Take(filter.PageSize)
+            var data = await query
+                .Skip((f.PageNumber - 1) * f.PageSize)
+                .Take(f.PageSize)
                 .ToListAsync();
 
-            return new PagedResponse<List<Domain.Entities.Advertisement>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            return new PagedResponse<List<Domain.Entities.Advertisement>>(data, f.PageNumber, f.PageSize, total);
         }
 
         public async Task<List<Domain.Entities.Advertisement>> GetAllAdvertisementsAsync()
         {
             return await _context.Advertisements
-           .AsNoTracking()
-             .Include(advertisement => advertisement.AdvertisementRealEstate)
-             .ToListAsync();
+                .AsNoTracking()
+                .Include(a => a.AdvertisementRealEstate)
+                .ToListAsync();
         }
 
-        public async Task<List<Domain.Entities.Advertisement>> GetUserAdvertisementsAsync(Guid userID)
+        public async Task<List<string>> GetAllDispositions()
+        {
+            return await _context.AdvertisementRealEstates
+                .AsNoTracking()
+                .Select(re => re.Disposition.ToString())
+                .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<List<string>> GetAllCities()
+        {
+            return await _context.Addresses
+                .AsNoTracking()
+                .GroupBy(a => a.City)
+                .Select(g => g.Key)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetMaxPrices()
+        {
+            return await _context.Advertisements.MaxAsync(a => a.Price);
+        }
+
+        public async Task<int> GetMinPrices()
+        {
+            return await _context.Advertisements.MinAsync(a => a.Price);
+        }
+
+        public async Task<List<Domain.Entities.Advertisement>> GetUserAdvertisementsAsync(Guid userId)
         {
             return await _context.Advertisements
-            .AsNoTracking()
-              .Include(advertisement => advertisement.AdvertisementRealEstate)
-              .Where(advertisement => advertisement.UserId == userID)
-              .ToListAsync();
+                .AsNoTracking()
+                .Include(a => a.AdvertisementRealEstate)
+                .Where(a => a.UserId == userId)
+                .ToListAsync();
         }
     }
 }

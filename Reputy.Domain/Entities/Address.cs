@@ -15,8 +15,8 @@ namespace Reputy.Domain.Entities
         public string Street { get; set; } = null!;
 
         [Required]
-        [JsonPropertyName("street_code")]
-        public string StreetCode { get; set; } = null!;
+        [JsonPropertyName("postal_code")]
+        public string PostalCode { get; set; } = null!;
 
         [Required]
         [JsonPropertyName("street_number")]

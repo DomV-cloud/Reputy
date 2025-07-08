@@ -12,9 +12,9 @@ namespace Reputy.Infrastructure.Extensions
                 query = query.Where(advertisement => advertisement.AdvertisementRealEstate.Disposition.Equals(filter.Disposition));
             }
 
-            if (!String.IsNullOrEmpty(filter.Location))
+            if (!String.IsNullOrEmpty(filter.City))
             {
-                query = query.Where(advertisement => advertisement.AdvertisementRealEstate.Location.Equals(filter.Location));
+                query = query.Where(advertisement => advertisement.AdvertisementRealEstate.Address.City.Equals(filter.City));
             }
 
             if (filter.Price.HasValue)

@@ -189,7 +189,7 @@ namespace Reputy.Application.DatabaseContext
                     AdvertisementRealEstateId = RealEstate1Id,
                     City = "Praha",
                     Street = "Náměstí Míru",
-                    StreetCode = "12000",
+                    PostalCode = "12000",
                     StreetNumber = "5"
                 },
                 new Address
@@ -198,7 +198,7 @@ namespace Reputy.Application.DatabaseContext
                     AdvertisementRealEstateId = RealEstate2Id,
                     City = "Praha",
                     Street = "Rašínovo nábřeží",
-                    StreetCode = "12800",
+                    PostalCode = "12800",
                     StreetNumber = "12"
                 },
                 new Address
@@ -207,7 +207,7 @@ namespace Reputy.Application.DatabaseContext
                     AdvertisementRealEstateId = RealEstate3Id,
                     City = "Brno",
                     Street = "U školy",
-                    StreetCode = "60200",
+                    PostalCode = "60200",
                     StreetNumber = "45"
                 }
             );

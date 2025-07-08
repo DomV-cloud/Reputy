@@ -22,6 +22,89 @@ namespace Reputy.Application.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Reputy.Domain.Entities.Address", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
+
+                    b.Property<Guid>("AdvertisementRealEstateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "city");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasAnnotation("Relational:JsonPropertyName", "created_at");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "postal_code");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "street");
+
+                    b.Property<string>("StreetNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "street_number");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasAnnotation("Relational:JsonPropertyName", "updated_at");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AdvertisementRealEstateId")
+                        .IsUnique();
+
+                    b.ToTable("Addresses");
+
+                    b.HasAnnotation("Relational:JsonPropertyName", "address");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("fb419a08-1490-4069-adf8-a12113a7d128"),
+                            AdvertisementRealEstateId = new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"),
+                            City = "Praha",
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2015),
+                            PostalCode = "12000",
+                            Street = "Náměstí Míru",
+                            StreetNumber = "5",
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2016)
+                        },
+                        new
+                        {
+                            ID = new Guid("155bf4ef-e3d7-4987-b7e1-b7836f0dd4df"),
+                            AdvertisementRealEstateId = new Guid("99999999-9999-9999-9999-999999999999"),
+                            City = "Praha",
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2022),
+                            PostalCode = "12800",
+                            Street = "Rašínovo nábřeží",
+                            StreetNumber = "12",
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2023)
+                        },
+                        new
+                        {
+                            ID = new Guid("46bf7244-7ee4-4414-b0de-76119d156855"),
+                            AdvertisementRealEstateId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            City = "Brno",
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2027),
+                            PostalCode = "60200",
+                            Street = "U školy",
+                            StreetNumber = "45",
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2028)
+                        });
+                });
+
             modelBuilder.Entity("Reputy.Domain.Entities.Advertisement", b =>
                 {
                     b.Property<Guid>("ID")
@@ -39,8 +122,8 @@ namespace Reputy.Application.Migrations
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
                     b.Property<decimal?>("Deposit")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("decimal(18,4)")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
                         .HasAnnotation("Relational:JsonPropertyName", "deposit");
 
                     b.Property<string>("Description")
@@ -60,9 +143,8 @@ namespace Reputy.Application.Migrations
                         .HasColumnType("bit")
                         .HasAnnotation("Relational:JsonPropertyName", "pets_allowed");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("decimal(18,4)")
+                    b.Property<int>("Price")
+                        .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "price");
 
                     b.Property<string>("Title")
@@ -91,42 +173,42 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("33333333-3333-3333-3333-333333333333"),
                             Address = "Náměstí Míru 5, Praha",
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4315),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1916),
                             Deposit = 5000m,
                             ImageUrls = "[]",
                             IsShared = true,
                             PetsAllowed = true,
-                            Price = 15000m,
+                            Price = 15000,
                             Title = "Moderní byt v centru",
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4316),
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1918),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             ID = new Guid("77777777-7777-7777-7777-777777777777"),
                             Address = "Rašínovo nábřeží 12, Praha 2",
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4321),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1925),
                             Deposit = 6000m,
                             ImageUrls = "[]",
                             IsShared = false,
                             PetsAllowed = false,
-                            Price = 18000m,
+                            Price = 18000,
                             Title = "Byt 2+KK s výhledem na řeku",
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4322),
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1927),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             ID = new Guid("88888888-8888-8888-8888-888888888888"),
                             Address = "U školy 45, Brno",
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4336),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1933),
                             Deposit = 8000m,
                             ImageUrls = "[]",
                             IsShared = false,
                             PetsAllowed = true,
-                            Price = 22000m,
+                            Price = 22000,
                             Title = "Velký byt 3+1 pro rodinu",
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4337),
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1935),
                             UserId = new Guid("11111111-1111-1111-1111-111111111111")
                         });
                 });
@@ -149,18 +231,13 @@ namespace Reputy.Application.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "disposition");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "location");
-
                     b.Property<int>("RentalType")
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "rentalType");
 
                     b.Property<decimal>("Size")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("decimal(18,4)")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
                         .HasAnnotation("Relational:JsonPropertyName", "size");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -179,36 +256,33 @@ namespace Reputy.Application.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("b995b9ec-7e5c-4342-9825-b89db062d30b"),
+                            ID = new Guid("cf51014d-7fb0-433e-9bc4-97c1b42a3cc6"),
                             AdvertisementId = new Guid("33333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4359),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1966),
                             Disposition = 2,
-                            Location = "Praha 1",
                             RentalType = 2,
                             Size = 30.0m,
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4360)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1967)
                         },
                         new
                         {
                             ID = new Guid("99999999-9999-9999-9999-999999999999"),
                             AdvertisementId = new Guid("77777777-7777-7777-7777-777777777777"),
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4364),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1973),
                             Disposition = 4,
-                            Location = "Praha 2",
                             RentalType = 1,
                             Size = 40.0m,
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4365)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1975)
                         },
                         new
                         {
                             ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             AdvertisementId = new Guid("88888888-8888-8888-8888-888888888888"),
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4369),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1990),
                             Disposition = 5,
-                            Location = "Brno",
                             RentalType = 1,
                             Size = 85.0m,
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4370)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1992)
                         });
                 });
 
@@ -265,12 +339,12 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("55555555-5555-5555-5555-555555555555"),
                             Comment = "Velmi spolehlivý pronajímatel",
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4413),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2089),
                             FromUserID = new Guid("22222222-2222-2222-2222-222222222222"),
                             Rating = 5m,
                             RentalID = new Guid("44444444-4444-4444-4444-444444444444"),
                             ToUserID = new Guid("11111111-1111-1111-1111-111111111111"),
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4414)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2090)
                         });
                 });
 
@@ -330,13 +404,13 @@ namespace Reputy.Application.Migrations
                         {
                             ID = new Guid("44444444-4444-4444-4444-444444444444"),
                             AdvertisementID = new Guid("33333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4394),
-                            EndDate = new DateTime(2026, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2063),
+                            EndDate = new DateTime(2026, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             LandlordId = new Guid("11111111-1111-1111-1111-111111111111"),
-                            StartDate = new DateTime(2025, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            StartDate = new DateTime(2025, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             Status = 2,
                             TenantId = new Guid("22222222-2222-2222-2222-222222222222"),
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4395)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(2064)
                         });
                 });
 
@@ -410,28 +484,39 @@ namespace Reputy.Application.Migrations
                             Av = 0,
                             AvatarUrl = "https://example.com/avatar1.png",
                             AverageRating = 0m,
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4149),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1746),
                             Email = "jan.novak@example.com",
                             FirstName = "Jan",
                             IsVerified = true,
                             LastName = "Novak",
                             Password = "hashedpassword1",
                             Role = 2,
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4152)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1748)
                         },
                         new
                         {
                             ID = new Guid("22222222-2222-2222-2222-222222222222"),
                             Av = 0,
                             AverageRating = 0m,
-                            CreatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4158),
+                            CreatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1755),
                             Email = "eva.svobodova@example.com",
                             FirstName = "Eva",
                             IsVerified = false,
                             LastName = "Svobodova",
                             Role = 1,
-                            UpdatedAt = new DateTime(2025, 6, 27, 13, 59, 52, 265, DateTimeKind.Local).AddTicks(4159)
+                            UpdatedAt = new DateTime(2025, 7, 4, 5, 48, 16, 805, DateTimeKind.Local).AddTicks(1757)
                         });
+                });
+
+            modelBuilder.Entity("Reputy.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Reputy.Domain.Entities.AdvertisementRealEstate", "AdvertisementRealEstate")
+                        .WithOne("Address")
+                        .HasForeignKey("Reputy.Domain.Entities.Address", "AdvertisementRealEstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdvertisementRealEstate");
                 });
 
             modelBuilder.Entity("Reputy.Domain.Entities.Advertisement", b =>
@@ -514,6 +599,11 @@ namespace Reputy.Application.Migrations
                 {
                     b.Navigation("AdvertisementRealEstate")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Reputy.Domain.Entities.AdvertisementRealEstate", b =>
+                {
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Reputy.Domain.Entities.User", b =>

@@ -11,5 +11,13 @@ namespace Reputy.Application.Common.Interfaces.Persistance
         Task<List<Advertisement>> GetAllAdvertisementsAsync();
 
         Task<PagedResponse<List<Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter);
+
+        Task<List<string>> GetAllCities();
+
+        Task<List<string>> GetAllDispositions();
+
+        Task<int> GetMaxPrices();
+
+        Task<int> GetMinPrices();
     }
 }

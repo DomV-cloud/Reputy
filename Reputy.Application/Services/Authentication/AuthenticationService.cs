@@ -24,16 +24,17 @@ namespace Reputy.Application.Services.Authentication
         {
             var salt = PasswordHasher.GenerateSalt();
             var generatedHashedPassword = PasswordHasher.HashPassword(request.Password, salt);
+            User userByEmail = _userRepository.GetUserByEmail(request.Email);
 
-            if (_userRepository.GetUserByEmail(request.Email) is not null)
+            if (userByEmail != null)
             {
                 throw new Exception("User with given email already exists");
             }
 
-            var isRoleParsed = Enum.TryParse(request.Role, out Role role);
+            var isRoleParsed = Enum.TryParse(request.Role, ignoreCase: true, out Role role);
             if (!isRoleParsed)
             {
-                throw new Exception($"Parsing role {role} failed");
+                throw new Exception($"Parsing role {request.Role} failed");
             }
 
             var user = new User

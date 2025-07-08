@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reputy.Api.Filters;
 using Reputy.Application.Common.Interfaces.Persistance;
+using Reputy.Application.Pagination;
 using Reputy.Application.PaginationFilter;
 using Reputy.Contracts.Advertisement;
+using Reputy.Contracts.Filter;
 
 namespace Reputy.Api.Controllers.Advertisement
 {
@@ -62,7 +64,39 @@ namespace Reputy.Api.Controllers.Advertisement
                     return NotFound("No advertisements found matching the filter criteria.");
                 }
 
-                var response = _mapper.Map<List<AdvertisementResponse>>(advertisements.Data);
+                var response = _mapper.Map<PagedResponse<List<AdvertisementResponse>>>(advertisements);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetSearchedAdvertisementsFilters()
+        {
+            try
+            {
+                var cities = await _advertisementRepository.GetAllCities();
+
+                if (cities == null || cities.Count == 0)
+                {
+                    throw new Exception("Failed to get locations");
+                }
+
+                var dispositions = await _advertisementRepository.GetAllDispositions();
+
+                if (dispositions == null || dispositions.Count == 0)
+                {
+                    throw new Exception("Failed to get dispositions");
+                }
+
+                int maxPrice = await _advertisementRepository.GetMaxPrices();
+                int minPrice = await _advertisementRepository.GetMinPrices();
+
+                var response = new FilterResponse(cities, dispositions, minPrice, maxPrice);
 
                 return Ok(response);
             }
