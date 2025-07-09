@@ -18,7 +18,7 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
             _context = ctx;
         }
 
-        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter)
+        public async Task<PagedResponse<List<Domain.Entities.Advertisement>>> GetAdvertisementsByFilterAsync(AdvertisementFilter filter)
         {
             var query = _context.Advertisements
                         .Include(a => a.Images)
@@ -46,7 +46,7 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
                 .ToListAsync();
         }
 
-        public async Task<List<string>> GetAllDispositions()
+        public async Task<List<string>> GetAllDispositionsAsync()
         {
             return await _context.AdvertisementRealEstates
                 .AsNoTracking()
@@ -55,7 +55,7 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
                 .ToListAsync();
         }
 
-        public async Task<List<string>> GetAllCities()
+        public async Task<List<string>> GetAllCitiesAsync()
         {
             return await _context.Addresses
                 .AsNoTracking()
@@ -64,12 +64,12 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
                 .ToListAsync();
         }
 
-        public async Task<int> GetMaxPrices()
+        public async Task<int> GetMaxPricesAsync()
         {
             return await _context.Advertisements.MaxAsync(a => a.Price);
         }
 
-        public async Task<int> GetMinPrices()
+        public async Task<int> GetMinPricesAsync()
         {
             return await _context.Advertisements.MinAsync(a => a.Price);
         }
@@ -81,6 +81,23 @@ namespace Reputy.Infrastructure.Persistance.Advertisement
                 .Include(a => a.AdvertisementRealEstate)
                 .Where(a => a.UserId == userId)
                 .ToListAsync();
+        }
+
+        public async Task<Domain.Entities.Advertisement> GetAdvertisementByIdAsync(Guid id)
+        {
+            var advertisementDetail = await _context.Advertisements
+                .Include(a => a.AdvertisementRealEstate)
+                    .ThenInclude(re => re.Address)
+                .Include(a => a.Landlord)
+                .Include (a => a.Images)
+                .FirstOrDefaultAsync(a => a.ID == id);
+
+            if (advertisementDetail == null)
+            {
+                return new();
+            }
+
+            return advertisementDetail;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Reputy.Api.Controllers.Advertisement
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet] // is is used anywhere?
         public async Task<IActionResult> GetAllAdvertisements()
         {
             try
@@ -38,7 +38,7 @@ namespace Reputy.Api.Controllers.Advertisement
                     return NotFound("No advertisements found.");
                 }
 
-                var response = _mapper.Map<List<AdvertisementResponse>>(allAdvertisement);
+                var response = _mapper.Map<List<BaseAdvertisementResponse>>(allAdvertisement);
                
                 return Ok(response);
             }
@@ -58,13 +58,13 @@ namespace Reputy.Api.Controllers.Advertisement
                     return BadRequest("Filter cannot be null");
                 }
 
-                var advertisements = await _advertisementRepository.GetAdvertisementsByFilter(filter);
+                var advertisements = await _advertisementRepository.GetAdvertisementsByFilterAsync(filter);
                 if (advertisements == null)
                 {
                     return NotFound("No advertisements found matching the filter criteria.");
                 }
 
-                var response = _mapper.Map<PagedResponse<List<AdvertisementResponse>>>(advertisements);
+                var response = _mapper.Map<PagedResponse<List<BaseAdvertisementResponse>>>(advertisements);
 
                 return Ok(response);
             }
@@ -79,24 +79,51 @@ namespace Reputy.Api.Controllers.Advertisement
         {
             try
             {
-                var cities = await _advertisementRepository.GetAllCities();
+                var cities = await _advertisementRepository.GetAllCitiesAsync();
 
                 if (cities == null || cities.Count == 0)
                 {
                     throw new Exception("Failed to get locations");
                 }
 
-                var dispositions = await _advertisementRepository.GetAllDispositions();
+                var dispositions = await _advertisementRepository.GetAllDispositionsAsync();
 
                 if (dispositions == null || dispositions.Count == 0)
                 {
                     throw new Exception("Failed to get dispositions");
                 }
 
-                int maxPrice = await _advertisementRepository.GetMaxPrices();
-                int minPrice = await _advertisementRepository.GetMinPrices();
+                int maxPrice = await _advertisementRepository.GetMaxPricesAsync();
+                int minPrice = await _advertisementRepository.GetMinPricesAsync();
 
                 var response = new FilterResponse(cities, dispositions, minPrice, maxPrice);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAdvertisementDetail(Guid id)
+        {
+            try
+            {
+                if (Guid.Empty == id)
+                {
+                    return BadRequest("Invalid id");
+                }
+
+                var advertisementDetail = await _advertisementRepository.GetAdvertisementByIdAsync(id);
+
+                if (advertisementDetail == null || advertisementDetail.AdvertisementRealEstate == null)
+                {
+                    return NotFound($"Advertisement with this id:{id} not found");
+                }
+
+                var response = _mapper.Map<AdvertisementDetailResponse>(advertisementDetail);
 
                 return Ok(response);
             }

@@ -10,14 +10,16 @@ namespace Reputy.Application.Common.Interfaces.Persistance
 
         Task<List<Advertisement>> GetAllAdvertisementsAsync();
 
-        Task<PagedResponse<List<Advertisement>>> GetAdvertisementsByFilter(AdvertisementFilter filter);
+        Task<PagedResponse<List<Advertisement>>> GetAdvertisementsByFilterAsync(AdvertisementFilter filter);
 
-        Task<List<string>> GetAllCities();
+        Task<List<string>> GetAllCitiesAsync();
 
-        Task<List<string>> GetAllDispositions();
+        Task<List<string>> GetAllDispositionsAsync();
 
-        Task<int> GetMaxPrices();
+        Task<int> GetMaxPricesAsync();
 
-        Task<int> GetMinPrices();
+        Task<int> GetMinPricesAsync();
+
+        Task<Advertisement> GetAdvertisementByIdAsync(Guid id);
     }
 }

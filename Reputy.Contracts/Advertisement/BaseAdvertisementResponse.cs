@@ -3,7 +3,7 @@ using Reputy.Contracts.User;
 
 namespace Reputy.Contracts.Advertisement
 {
-    public record class AdvertisementResponse
+    public record class BaseAdvertisementResponse
     {
         public Guid ID { get; init; }
         public string? ImageUrl { get; init; }

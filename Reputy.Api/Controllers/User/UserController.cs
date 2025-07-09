@@ -44,7 +44,7 @@ namespace Reputy.Api.Controllers.User
                     return BadRequest($"Get User adverstisements with ID: {userID} failed");
                 }
 
-                var response = _mapper.Map<List<AdvertisementResponse>>(userAdvertisements);
+                var response = _mapper.Map<List<BaseAdvertisementResponse>>(userAdvertisements);
 
                 return Ok(response);
             }
