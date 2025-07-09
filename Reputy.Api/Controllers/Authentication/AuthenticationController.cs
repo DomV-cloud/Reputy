@@ -29,10 +29,12 @@ namespace Reputy.Api.Controllers.Authentication
                 var authResult = _authenticationService.Register(request);
 
                 var response = new AuthenticationResponse(
-                                   authResult.User.ID,
                                    authResult.User.FirstName,
                                    authResult.User.LastName,
                                    authResult.User.Email,
+                                   authResult.User.Role.ToString(),
+                                   authResult.User.AvatarUrl,
+                                   authResult.User.AverageRating,
                                    authResult.Token);
 
                 return Ok(response);
@@ -53,12 +55,13 @@ namespace Reputy.Api.Controllers.Authentication
                    request.Password);
 
                 var response = new AuthenticationResponse(
-                    authResult.User.ID,
-                    authResult.User.FirstName,
-                    authResult.User.LastName,
-                    authResult.User.Email,
-                    authResult.Token
-                    );
+                                   authResult.User.FirstName,
+                                   authResult.User.LastName,
+                                   authResult.User.Email,
+                                   authResult.User.Role.ToString(),
+                                   authResult.User.AvatarUrl,
+                                   authResult.User.AverageRating,
+                                   authResult.Token);
 
                 return Ok(response);
             }

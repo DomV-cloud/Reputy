@@ -70,15 +70,14 @@ namespace Reputy.Application.DatabaseContext
             var dispositions = Enum.GetValues(typeof(Disposition)).Cast<Disposition>().ToArray();
             var rentalTypes = Enum.GetValues(typeof(TypeOfRental)).Cast<TypeOfRental>().ToArray();
 
-            // Ukázkové URL obrázků (v produkci by to byly reálné)
             string[] sampleImages =
             {
-        "https://images.unsplash.com/photo-1464983953574-0892a716854b",
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd",
-        "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
-        "https://images.unsplash.com/photo-1472224371017-08207f84aaae"
-    };
+                "https://images.unsplash.com/photo-1464983953574-0892a716854b",
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+                "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd",
+                "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99",
+                "https://images.unsplash.com/photo-1472224371017-08207f84aaae"
+            };
 
             for (int i = 1; i <= 100; i++)
             {
@@ -100,7 +99,6 @@ namespace Reputy.Application.DatabaseContext
                     ID = adId,
                     UserId = landlord.ID,
                     Title = $"Byt {i} - {city} {street}",
-                    Address = $"{street} {rnd.Next(1, 100)}, {city}",
                     Price = price,
                     IsShared = (i % 2 == 0),
                     Deposit = price / 2,
@@ -242,7 +240,6 @@ namespace Reputy.Application.DatabaseContext
                     ID = Ad1Id,
                     UserId = User1Id,
                     Title = "Moderní byt v centru",
-                    Address = "Náměstí Míru 5, Praha",
                     Price = 15000,
                     IsShared = true,
                     Deposit = 5000m,
@@ -255,7 +252,6 @@ namespace Reputy.Application.DatabaseContext
                     ID = Ad2Id,
                     UserId = User1Id,
                     Title = "Byt 2+KK s výhledem na řeku",
-                    Address = "Rašínovo nábřeží 12, Praha 2",
                     Price = 18000,
                     IsShared = false,
                     Deposit = 6000m,
@@ -268,7 +264,6 @@ namespace Reputy.Application.DatabaseContext
                     ID = Ad3Id,
                     UserId = User1Id,
                     Title = "Velký byt 3+1 pro rodinu",
-                    Address = "U školy 45, Brno",
                     Price = 22000,
                     IsShared = false,
                     Deposit = 8000m,

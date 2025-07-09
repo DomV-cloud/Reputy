@@ -53,6 +53,6 @@ namespace Reputy.Domain.Entities
         public List<Rental> RentalsAsLandlord { get; set; } = [];
 
         [JsonPropertyName("rentals_tenant")]
-        public List<Rental> RentalsAsTenant { get; set; } = new();
+        public List<Rental> RentalsAsTenant { get; set; } = [];
     }
 }

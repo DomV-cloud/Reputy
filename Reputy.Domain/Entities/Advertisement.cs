@@ -16,10 +16,6 @@ namespace Reputy.Domain.Entities
         public string Title { get; set; } = null!;
 
         [Required]
-        [JsonPropertyName("address")]
-        public string Address { get; set; } = null!; // should be object
-
-        [Required]
         [JsonPropertyName("realEstate")]
         public AdvertisementRealEstate AdvertisementRealEstate { get; set; } = null!;
 
@@ -45,6 +41,6 @@ namespace Reputy.Domain.Entities
         public List<Image> Images { get; set; } = [];
 
         [JsonPropertyName("landlord")]
-        public User Landlord { get; set; }
+        public User Landlord { get; set; } = null!;
     }
 }
